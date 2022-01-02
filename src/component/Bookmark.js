@@ -6,7 +6,9 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 
-function Folder(props) {
+import FormDialog from './BookmarkFormDialog';
+
+function Bookmark(props) {
     return (
         props.bookmarks.map((bookmark) =>
         <Grid item>
@@ -14,7 +16,7 @@ function Folder(props) {
           <CardMedia
             component="img"
             height="240"
-            image={bookmark.absolute_image}
+            image={bookmark.image}
             alt={bookmark.title}
           />
           <CardContent>        
@@ -34,10 +36,11 @@ function Folder(props) {
           {bookmark._id}
         </Link>
           </CardActions>
+        <FormDialog bookmark={bookmark} selectPath={props.selectPath} selectedFolder={props.selectedFolder}/>
         </Card>
         </Grid>
          )
       )
   }
 
-export default Folder
+export default Bookmark

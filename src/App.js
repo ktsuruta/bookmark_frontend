@@ -12,8 +12,11 @@ import './App.css';
 function App() {
   const [bookmark, setBookmark] = useState([])
   const [folder, setFolder] = useState([])
- 
-  const getBookmark = (params) => {
+  const [selectedFolder, setSelectedFolder] = useState([])
+  
+  const getBookmark = (path) => {
+    setSelectedFolder(path)
+    const params = {path:path}
     axios.get('http://127.0.0.1:5000/api/bookmark',{params})
     .then(res => {
       setBookmark(res.data)
@@ -45,7 +48,7 @@ function App() {
 
   const selectPath = (path) => {
     console.log(path)
-    getBookmark({path:path})
+    getBookmark(path)
   }
 
   const updateQuery = (query) => {
@@ -56,6 +59,11 @@ function App() {
   useEffect(() =>{
     getBookmark({})
   }, [])
+
+  useEffect(() =>{
+    setSelectedFolder()
+  }, [])
+
 
   useEffect(() =>{
     getFolder()
@@ -70,8 +78,9 @@ function App() {
         <FileUpload getBookmark={getBookmark} getFolder={getFolder} />
       </Grid>
       <Grid lg={9} sm={9} spacing={10}>
+        <h3>{selectedFolder}</h3>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Bookmark bookmarks={bookmark}/>
+            <Bookmark bookmarks={bookmark} selectPath={selectPath} selectedFolder={selectedFolder}/>
           </Grid>
       </Grid>
     </Grid>
