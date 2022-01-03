@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
+import AddFolder from './component/AddFolder';
+import AddBookmark from './component/AddBookmark';
 import Folder from './component/Folder';
 import Search from './component/Search';
 import Bookmark from './component/Bookmark';
@@ -73,12 +75,14 @@ function App() {
     <div className="App">
     <Grid container>
       <Grid sm={3}>
-        <Search updateQuery={updateQuery}/>
+        <AddFolder folders={folder} selectPath={selectPath}/>
+        <AddBookmark folders={folder} selectPath={selectPath}/>
         <Folder folders={folder} selectPath={selectPath}/>
         <FileUpload getBookmark={getBookmark} getFolder={getFolder} />
       </Grid>
       <Grid lg={9} sm={9} spacing={10}>
         <h3>{selectedFolder}</h3>
+        <Search updateQuery={updateQuery}/>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Bookmark bookmarks={bookmark} selectPath={selectPath} selectedFolder={selectedFolder}/>
           </Grid>

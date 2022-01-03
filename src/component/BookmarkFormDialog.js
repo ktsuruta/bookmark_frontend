@@ -1,7 +1,9 @@
 import * as React from 'react';
 import axios from 'axios'
+
 import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -47,6 +49,19 @@ export default function FormDialog(props) {
     .then(res => {
       console.log(res.data)
       props.selectPath(props.selectedFolder)
+      setOpen(false);
+    })
+    .catch(function(e) {
+      console.log("ERROR ", e);
+    })
+  }
+
+  const deleteBookmark = (event) => {
+    axios.delete('http://127.0.0.1:5000/api/bookmark/' + props.bookmark._id)
+    .then(res => {
+      console.log(res.data)
+      props.selectPath(props.selectedFolder)
+      setOpen(false);
     })
     .catch(function(e) {
       console.log("ERROR ", e);
@@ -142,7 +157,11 @@ export default function FormDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={updateBookmark}>Subscribe</Button>
+          <Button onClick={updateBookmark}>Update</Button>
+          <Button variant="outlined" onClick={deleteBookmark} startIcon={<DeleteIcon />}>
+          Delete
+          </Button>
+
         </DialogActions>
       </Dialog>
     </div>
