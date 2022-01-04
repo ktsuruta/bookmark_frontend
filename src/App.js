@@ -48,6 +48,14 @@ function App() {
     })
   }
 
+  const addFolder = (path) => {
+    const _folder = folder
+    _folder.push(path)
+    console.log(_folder)
+    setFolder(_folder)
+  }
+
+
   const selectPath = (path) => {
     console.log(path)
     getBookmark(path)
@@ -75,7 +83,7 @@ function App() {
     <div className="App">
     <Grid container>
       <Grid sm={3}>
-        <AddFolder folders={folder} selectPath={selectPath}/>
+        <AddFolder folders={folder} addFolder={addFolder} selectPath={selectPath}/>
         <AddBookmark folders={folder} selectPath={selectPath}/>
         <Folder folders={folder} selectPath={selectPath}/>
         <FileUpload getBookmark={getBookmark} getFolder={getFolder} />
@@ -84,7 +92,7 @@ function App() {
         <h3>{selectedFolder}</h3>
         <Search updateQuery={updateQuery}/>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Bookmark bookmarks={bookmark} selectPath={selectPath} selectedFolder={selectedFolder}/>
+            <Bookmark bookmarks={bookmark} folders={folder} selectPath={selectPath} selectedFolder={selectedFolder}/>
           </Grid>
       </Grid>
     </Grid>

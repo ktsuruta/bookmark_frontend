@@ -1,8 +1,8 @@
-import Button from '@mui/material/Button';
+import FormDialogAddFolder from './AddFolderDialog';
 
 function AddFolder(props) {
     return (
-     <Button variant="text">Add Folder</Button>
+     <FormDialogAddFolder addFolder={props.addFolder}/>
      )
 
   }

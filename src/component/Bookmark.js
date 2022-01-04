@@ -38,7 +38,7 @@ function Bookmark(props) {
           {bookmark._id}
         </Link>
           </CardActions>
-        <FormDialog bookmark={bookmark} selectPath={props.selectPath} selectedFolder={props.selectedFolder}/>
+        <FormDialog bookmark={bookmark} selectPath={props.selectPath} folders={props.folders} selectedFolder={props.selectedFolder}/>
         </Card>
         </Grid>
          )

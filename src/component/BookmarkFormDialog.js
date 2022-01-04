@@ -11,18 +11,21 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import NativeSelect from '@mui/material/NativeSelect';
+
+let params = {}
+
 export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [param, setParam] = useState([])
 
   useEffect(() =>{
-    setParam({
-    "bookmark_name": props.bookmark.bookmark_name,
-    "image": props.bookmark.image,
-    "url": props.bookmark.url,
-    "title": props.bookmark.title,
-    "description": props.bookmark.description})
+    params = {}
   }, [])
+
+
+  const folderPulldown = props.folders.map((folder) =>
+    <option value={folder}>{folder}</option>
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,21 +37,18 @@ export default function FormDialog(props) {
 
 
   const updateParams = (event) => {
-    console.log(event.target.name)
-    console.log(event.target.value)
-    console.log(param[event.target.name])
-    let _param = param
-    _param[event.target.name] = event.target.value
-    console.log(_param)
-    setParam(_param)
+    params[event.target.name] = event.target.value
+    console.log(params)
   }
 
+
   const updateBookmark = (event) => {
-    console.log(param)
-    axios.post('http://127.0.0.1:5000/api/bookmark/' + props.bookmark._id,{param})
+    console.log(params)
+    axios.post('http://127.0.0.1:5000/api/bookmark/' + props.bookmark._id,{params})
     .then(res => {
       console.log(res.data)
       props.selectPath(props.selectedFolder)
+      params = {}
       setOpen(false);
     })
     .catch(function(e) {
@@ -92,18 +92,19 @@ export default function FormDialog(props) {
             onChange={event => updateParams(event)}
             variant="standard"
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="path"
-            name="path"
-            defaultValue={props.bookmark.path}
-            label="Folder"
-            type="email"
+        <NativeSelect
             fullWidth
-            variant="standard"
+            autoFocus
             onChange={event => updateParams(event)}
-          />
+            defaultValue={props.bookmark.path}
+            inputProps={{
+            name: 'path',
+            id: 'path',
+          }}
+        >
+          <option value={props.bookmark.path}>{props.bookmark.path}</option>
+          {folderPulldown}
+        </NativeSelect>
 
           <TextField
             autoFocus
