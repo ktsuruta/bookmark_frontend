@@ -19,7 +19,7 @@ function App() {
   const getBookmark = (path) => {
     setSelectedFolder(path)
     const params = {path:path}
-    axios.get('http://127.0.0.1:5000/api/bookmark',{params})
+    axios.get('http://localhost:5000/api/bookmark',{params})
     .then(res => {
       setBookmark(res.data)
     })
@@ -29,7 +29,7 @@ function App() {
   }
 
   const searchBookmark = (params) => {
-    axios.get('http://127.0.0.1:5000/api/bookmark/search',{params})
+    axios.get('http://localhost:5000/api/bookmark/search',{params})
     .then(res => {
       setBookmark(res.data)
     })
@@ -39,7 +39,7 @@ function App() {
   }
 
   const getFolder = () => {
-    axios.get('http://127.0.0.1:5000/api/folder')
+    axios.get('http://localhost:5000/api/folder')
     .then(res => {
       setFolder(res.data)
     })
