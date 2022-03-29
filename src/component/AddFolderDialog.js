@@ -37,10 +37,10 @@ export default function FormDialogAddFolder(props) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        Add Folder
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Add Folder</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -48,7 +48,7 @@ export default function FormDialogAddFolder(props) {
             id="bookmark_name"
             name="bookmark_name"
             defaultValue=''
-            label="Bookmark Name"
+            label="Folder Name"
             type="email"
             fullWidth
             onChange={event => updateNewFolder(event)}
