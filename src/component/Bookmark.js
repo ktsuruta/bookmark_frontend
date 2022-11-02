@@ -14,10 +14,10 @@ function Bookmark(props) {
     return (
         props.bookmarks.map((bookmark) =>
         <Grid item>
-        <Card sx={{ maxWidth: 545 }}>
+        <Card sx={{ maxWidth: 385 }}>
           <CardMedia
             component="img"
-            height="240"
+            width= "100%"
             image={bookmark.image}
             alt={bookmark.title}
           />
@@ -34,8 +34,6 @@ function Bookmark(props) {
           variant="body2"
           href={bookmark.url}
         >
-          {bookmark.bookmark_name} / 
-          {bookmark._id}
         </Link>
           </CardActions>
         <FormDialog bookmark={bookmark} selectPath={props.selectPath} folders={props.folders} selectedFolder={props.selectedFolder}/>

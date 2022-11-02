@@ -82,18 +82,22 @@ function App() {
   return (
     <div className="App">
     <Grid container>
-      <Grid sm={3}>
+      <Grid columns={{ xs: 3, sm: 3, md: 3 }}>
         <AddFolder folders={folder} addFolder={addFolder} selectPath={selectPath}/>
         <AddBookmark folders={folder} selectPath={selectPath}/>
         <Folder folders={folder} selectPath={selectPath}/>
         <FileUpload getBookmark={getBookmark} getFolder={getFolder} />
       </Grid>
       <Grid lg={9} sm={9} spacing={10}>
-        <h3>{selectedFolder}</h3>
-        <Search updateQuery={updateQuery}/>
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Bookmark bookmarks={bookmark} folders={folder} selectPath={selectPath} selectedFolder={selectedFolder}/>
-          </Grid>
+        <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} text-align="flex-start" >
+          <h3>{selectedFolder}</h3>
+        </Grid>
+        <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} text-align="flex-start" >
+          <Search updateQuery={updateQuery}/>
+        </Grid>
+        <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Bookmark bookmarks={bookmark} folders={folder} selectPath={selectPath} selectedFolder={selectedFolder}/>
+        </Grid>
       </Grid>
     </Grid>
     </div>
